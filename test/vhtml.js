@@ -97,9 +97,13 @@ describe('vhtml', () => {
 				<source />
 				<track />
 				<wbr />
+				{/* Not void elements */}
+				<div />
+				<span />
+				<p />
 			</div>
 		).to.equal(
-			`<div><area><base><br><col><command><embed><hr><img><input><keygen><link><meta><param><source><track><wbr></div>`
+			`<div><area><base><br><col><command><embed><hr><img><input><keygen><link><meta><param><source><track><wbr><div></div><span></span><p></p></div>`
 		);
 	});
 });

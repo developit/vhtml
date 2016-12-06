@@ -1,3 +1,5 @@
+import emptyTags from 'empty-tags';
+
 // escape an attribute
 let esc = str => String(str).replace(/[&<>"']/g, s=>`&${map[s]};`);
 let map = {'&':'amp','<':'lt','>':'gt','"':'quot',"'":'apos'};
@@ -24,20 +26,26 @@ export default function h(name, attrs) {
 			s += ` ${esc(i)}="${esc(attrs[i])}"`;
 		}
 	}
-	s += '>';
 
-	while (stack.length) {
-		let child = stack.pop();
-		if (child) {
-			if (child.pop) {
-				for (let i=child.length; i--; ) stack.push(child[i]);
-			}
-			else {
-				s += sanitized[child]===true ? child : esc(child);
+	if (emptyTags.indexOf(name) === -1) {
+		s += '>';
+
+		while (stack.length) {
+			let child = stack.pop();
+			if (child) {
+				if (child.pop) {
+					for (let i=child.length; i--; ) stack.push(child[i]);
+				}
+				else {
+					s += sanitized[child]===true ? child : esc(child);
+				}
 			}
 		}
+
+		sanitized[s += `</${name}>`] = true;
+	} else {
+		sanitized[s += '>'] = true;
 	}
 
-	sanitized[s += `</${name}>`] = true;
 	return s;
 }

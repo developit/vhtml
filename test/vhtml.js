@@ -77,4 +77,29 @@ describe('vhtml', () => {
 			`<div class="foo"><h1>Hi!</h1><ul><li id="0"><h4>one</h4>This is item one!</li><li id="1"><h4>two</h4>This is item two!</li></ul></div>`
 		);
 	});
+
+	it('should understand empty elements', () => {
+		expect(
+			<div>
+				<area />
+				<base />
+				<br />
+				<col />
+				<command />
+				<embed />
+				<hr />
+				<img />
+				<input />
+				<keygen />
+				<link />
+				<meta />
+				<param />
+				<source />
+				<track />
+				<wbr />
+			</div>
+		).to.equal(
+			`<div><area><base><br><col><command><embed><hr><img><input><keygen><link><meta><param><source><track><wbr></div>`
+		);
+	});
 });

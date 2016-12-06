@@ -78,7 +78,7 @@ describe('vhtml', () => {
 		);
 	});
 
-	it('should understand empty elements', () => {
+	it('should support empty (void) tags', () => {
 		expect(
 			<div>
 				<area />

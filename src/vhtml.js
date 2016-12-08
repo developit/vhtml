@@ -1,4 +1,4 @@
-import emptyTags from 'empty-tags';
+import emptyTags from './empty-tags';
 
 // escape an attribute
 let esc = str => String(str).replace(/[&<>"']/g, s=>`&${map[s]};`);

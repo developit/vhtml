@@ -15,7 +15,7 @@ export default function h(name, attrs) {
 
 	// Sortof component support!
 	if (typeof name==='function') {
-		if (attrs) attrs.children = stack.reverse();
+		(attrs || (attrs = {})).children = stack.reverse();
 		return name(attrs);
 		// return name(attrs, stack.reverse());
 	}

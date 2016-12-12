@@ -78,6 +78,57 @@ describe('vhtml', () => {
 		);
 	});
 
+	it('should support sortof components without args', () => {
+	  let items = ['one', 'two'];
+
+	  const Item = () => (
+	    <li>
+	      <h4></h4>
+	    </li>
+	  );
+
+	  expect(
+	    <div class="foo">
+	      <h1>Hi!</h1>
+	      <ul>
+	        { items.map( (item, index) => (
+	          <Item>
+	            This is item {item}!
+	          </Item>
+	        )) }
+	      </ul>
+	    </div>
+	  ).to.equal(
+	    `<div class="foo"><h1>Hi!</h1><ul><li><h4></h4></li><li><h4></h4></li></ul></div>`
+	  );
+	});
+
+	it('should support sortof components without args but with children', () => {
+	  let items = ['one', 'two'];
+
+	  const Item = ({ children }) => (
+	    <li>
+	      <h4></h4>
+	      {children}
+	    </li>
+	  );
+
+	  expect(
+	    <div class="foo">
+	      <h1>Hi!</h1>
+	      <ul>
+	        { items.map( (item, index) => (
+	          <Item>
+	            This is item {item}!
+	          </Item>
+	        )) }
+	      </ul>
+	    </div>
+	  ).to.equal(
+	    `<div class="foo"><h1>Hi!</h1><ul><li><h4></h4>This is item one!</li><li><h4></h4>This is item two!</li></ul></div>`
+	  );
+	});
+
 	it('should support empty (void) tags', () => {
 		expect(
 			<div>

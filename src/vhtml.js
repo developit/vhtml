@@ -42,10 +42,11 @@ export default function h(name, attrs) {
 			}
 		}
 
-		sanitized[s += `</${name}>`] = true;
+		s += `</${name}>`;
 	} else {
-		sanitized[s += '>'] = true;
+		s += '>';
 	}
 
+	sanitized[s] = true;
 	return s;
 }

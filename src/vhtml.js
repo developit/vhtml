@@ -10,6 +10,14 @@ let DOMAttributeNames = {
 
 let sanitized = {};
 
+function Element(name, attrs, stack) {
+	this.type = name;
+	this.props = attrs || {};
+	this.toString = function () {
+		return _h(this.type, this.props, stack);
+	};
+}
+
 /** Hyperscript reviver that constructs a sanitized HTML string. */
 export default function h(name, attrs) {
 	let stack=[];
@@ -17,11 +25,14 @@ export default function h(name, attrs) {
 		stack.push(arguments[i]);
 	}
 
+	return new Element(name, attrs, stack);
+}
+
+function _h(name, attrs, stack) {
 	// Sortof component support!
 	if (typeof name==='function') {
-		(attrs || (attrs = {})).children = stack.reverse();
-		return name(attrs);
-		// return name(attrs, stack.reverse());
+		attrs.children = stack.reverse();
+		return String(name(attrs));
 	}
 
 	let s = `<${name}`;
@@ -41,7 +52,8 @@ export default function h(name, attrs) {
 					for (let i=child.length; i--; ) stack.push(child[i]);
 				}
 				else {
-					s += sanitized[child]===true ? child : esc(child);
+					let resolved = String(child);
+					s += sanitized[resolved]===true ? resolved : esc(resolved);
 				}
 			}
 		}

@@ -60,14 +60,14 @@
     "babel-register": "^6.7.2",
     "chai": "^3.5.0",
     "eslint": "^3.1.0",
-    "gzip-size-cli": "^1.0.0",
+    "gzip-size-cli": "^2.0.0",
     "mkdirp": "^0.5.1",
     "mocha": "^3.1.2",
-    "npm-run-all": "^2.3.0",
-    "pretty-bytes-cli": "^1.0.0",
-    "rollup": "^0.36.3",
+    "npm-run-all": "^4.0.2",
+    "pretty-bytes-cli": "^2.0.0",
+    "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.4.0",
     "rollup-plugin-es3": "^1.0.3",
-    "uglify-js": "^2.6.2"
+    "uglify-js": "^3.0.1"
   }
 }

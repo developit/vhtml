@@ -1,5 +1,7 @@
 # vhtml
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/developit/vhtml.svg)](https://greenkeeper.io/)
+
 [![NPM](https://img.shields.io/npm/v/vhtml.svg?style=flat)](https://www.npmjs.org/package/vhtml)
 [![travis-ci](https://travis-ci.org/developit/vhtml.svg?branch=master)](https://travis-ci.org/developit/vhtml)
 

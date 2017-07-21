@@ -3,6 +3,7 @@ import emptyTags from './empty-tags';
 // escape an attribute
 let esc = str => String(str).replace(/[&<>"']/g, s=>`&${map[s]};`);
 let map = {'&':'amp','<':'lt','>':'gt','"':'quot',"'":'apos'};
+let setInnerHTMLAttr = 'dangerouslySetInnerHTML';
 let DOMAttributeNames = {
 	className: 'class',
 	htmlFor: 'for'
@@ -26,7 +27,7 @@ export default function h(name, attrs) {
 
 	let s = `<${name}`;
 	if (attrs) for (let i in attrs) {
-		if (attrs[i]!==false && attrs[i]!=null) {
+		if (attrs[i]!==false && attrs[i]!=null && i !== setInnerHTMLAttr) {
 			s += ` ${DOMAttributeNames[i] ? DOMAttributeNames[i] : esc(i)}="${esc(attrs[i])}"`;
 		}
 	}
@@ -34,7 +35,10 @@ export default function h(name, attrs) {
 	if (emptyTags.indexOf(name) === -1) {
 		s += '>';
 
-		while (stack.length) {
+		if (attrs && attrs[setInnerHTMLAttr] && attrs[setInnerHTMLAttr].__html) {
+			s += attrs[setInnerHTMLAttr].__html;
+		}
+		else while (stack.length) {
 			let child = stack.pop();
 			if (child) {
 				if (child.pop) {

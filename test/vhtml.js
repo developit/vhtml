@@ -40,6 +40,14 @@ describe('vhtml', () => {
 		);
 	});
 
+	it('should not sanitize the "dangerouslySetInnerHTML" attribute, and directly set its `__html` property as innerHTML', () => {
+		expect(
+			<div dangerouslySetInnerHTML={{ __html: "<span>Injected HTML</span>" }} />
+		).to.equal(
+			`<div><span>Injected HTML</span></div>`
+		);
+	});
+
 	it('should flatten children', () => {
 		expect(
 			<div>

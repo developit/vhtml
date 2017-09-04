@@ -35,7 +35,7 @@ export default function h(name, attrs) {
 	if (emptyTags.indexOf(name) === -1) {
 		s += '>';
 
-		if (attrs && attrs[setInnerHTMLAttr] && attrs[setInnerHTMLAttr].__html) {
+		if (attrs && attrs[setInnerHTMLAttr]) {
 			s += attrs[setInnerHTMLAttr].__html;
 		}
 		else while (stack.length) {

@@ -31,10 +31,9 @@ export default function h(name, attrs) {
 			s += ` ${DOMAttributeNames[i] ? DOMAttributeNames[i] : esc(i)}="${esc(attrs[i])}"`;
 		}
 	}
+	s += '>';
 
 	if (emptyTags.indexOf(name) === -1) {
-		s += '>';
-
 		if (attrs && attrs[setInnerHTMLAttr]) {
 			s += attrs[setInnerHTMLAttr].__html;
 		}
@@ -51,8 +50,6 @@ export default function h(name, attrs) {
 		}
 
 		s += `</${name}>`;
-	} else {
-		s += '>';
 	}
 
 	sanitized[s] = true;

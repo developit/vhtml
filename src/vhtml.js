@@ -14,18 +14,19 @@ let sanitized = {};
 /** Hyperscript reviver that constructs a sanitized HTML string. */
 export default function h(name, attrs) {
 	let stack=[], s = `<${name}`;
+	attrs = attrs || {};
 	for (let i=arguments.length; i-- > 2; ) {
 		stack.push(arguments[i]);
 	}
 
 	// Sortof component support!
 	if (typeof name==='function') {
-		(attrs || (attrs = {})).children = stack.reverse();
+		attrs.children = stack.reverse();
 		return name(attrs);
 		// return name(attrs, stack.reverse());
 	}
 
-	if (attrs) for (let i in attrs) {
+	for (let i in attrs) {
 		if (attrs[i]!==false && attrs[i]!=null && i !== setInnerHTMLAttr) {
 			s += ` ${DOMAttributeNames[i] ? DOMAttributeNames[i] : esc(i)}="${esc(attrs[i])}"`;
 		}
@@ -33,7 +34,7 @@ export default function h(name, attrs) {
 	s += '>';
 
 	if (emptyTags.indexOf(name) === -1) {
-		if (attrs && attrs[setInnerHTMLAttr]) {
+		if (attrs[setInnerHTMLAttr]) {
 			s += attrs[setInnerHTMLAttr].__html;
 		}
 		else while (stack.length) {

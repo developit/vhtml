@@ -165,4 +165,15 @@ describe('vhtml', () => {
 			'<div class="my-class" for="id"></div>'
 		);
 	});
+
+	it('should render a child of 0', () => {
+		function Child ({ children }) {
+			return <span>{children}</span>;
+		}
+		expect(
+			<div><Child>{0}</Child></div>
+		).to.equal(
+			'<div><span>0</span></div>'
+		);
+	});
 });

@@ -36,7 +36,7 @@ export default function h(name, attrs) {
 
 		while (stack.length) {
 			let child = stack.pop();
-			if (child) {
+			if (child !== undefined) {
 				if (child.pop) {
 					for (let i=child.length; i--; ) stack.push(child[i]);
 				}

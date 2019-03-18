@@ -176,4 +176,20 @@ describe('vhtml', () => {
 			'<div><span>0</span></div>'
 		);
 	});
+
+	it('should not attempt to render a child of null or undefined', () => {
+		function Child ({ children }) {
+			return <span>{children}</span>;
+		}
+		expect(
+			<div><Child>{null}</Child></div>
+		).to.equal(
+			'<div><span></span></div>'
+		);
+		expect(
+			<div><Child>{undefined}</Child></div>
+		).to.equal(
+			'<div><span></span></div>'
+		);
+	});
 });

@@ -40,6 +40,14 @@ describe('vhtml', () => {
 		);
 	});
 
+	it('should not sanitize the "dangerouslySetInnerHTML" attribute, and directly set its `__html` property as innerHTML', () => {
+		expect(
+			<div dangerouslySetInnerHTML={{ __html: "<span>Injected HTML</span>" }} />
+		).to.equal(
+			`<div><span>Injected HTML</span></div>`
+		);
+	});
+
 	it('should flatten children', () => {
 		expect(
 			<div>
@@ -190,6 +198,22 @@ describe('vhtml', () => {
 			<div><Child>{undefined}</Child></div>
 		).to.equal(
 			'<div><span></span></div>'
+		);
+	});
+
+  it('should support string fragments', () => {
+		expect(
+			h(null, null, "foo", "bar", "baz")
+		).to.equal(
+			'foobarbaz'
+		);
+	});
+
+	it('should support element fragments', () => {
+		expect(
+			h(null, null, <p>foo</p>, <em>bar</em>, <div class="qqqqqq">baz</div>)
+		).to.equal(
+			'<p>foo</p><em>bar</em><div class="qqqqqq">baz</div>'
 		);
 	});
 });

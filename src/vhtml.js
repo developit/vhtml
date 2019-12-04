@@ -9,7 +9,7 @@ let DOMAttributeNames = {
 	htmlFor: 'for'
 };
 
-let sanitized = {};
+let sanitized = new WeakMap();
 
 /** Hyperscript reviver that constructs a sanitized HTML string. */
 export default function h(name, attrs) {
@@ -47,7 +47,7 @@ export default function h(name, attrs) {
 					for (let i=child.length; i--; ) stack.push(child[i]);
 				}
 				else {
-					s += sanitized[child]===true ? child : esc(child);
+					s += sanitized.has(child) ? child : esc(child);
 				}
 			}
 		}
@@ -55,6 +55,6 @@ export default function h(name, attrs) {
 		s += name ? `</${name}>` : '';
 	}
 
-	sanitized[s] = true;
+	sanitized.set(s, true);
 	return s;
 }

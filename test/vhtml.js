@@ -174,7 +174,34 @@ describe('vhtml', () => {
 		);
 	});
 
-	it('should support string fragments', () => {
+	it('should render a child of 0', () => {
+		function Child ({ children }) {
+			return <span>{children}</span>;
+		}
+		expect(
+			<div><Child>{0}</Child></div>
+		).to.equal(
+			'<div><span>0</span></div>'
+		);
+	});
+
+	it('should not attempt to render a child of null or undefined', () => {
+		function Child ({ children }) {
+			return <span>{children}</span>;
+		}
+		expect(
+			<div><Child>{null}</Child></div>
+		).to.equal(
+			'<div><span></span></div>'
+		);
+		expect(
+			<div><Child>{undefined}</Child></div>
+		).to.equal(
+			'<div><span></span></div>'
+		);
+	});
+
+  it('should support string fragments', () => {
 		expect(
 			h(null, null, "foo", "bar", "baz")
 		).to.equal(
@@ -189,5 +216,4 @@ describe('vhtml', () => {
 			'<p>foo</p><em>bar</em><div class="qqqqqq">baz</div>'
 		);
 	});
-
 });

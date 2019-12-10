@@ -67,7 +67,6 @@
     "pretty-bytes-cli": "^1.0.0",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.4.0",
-    "rollup-plugin-es3": "^1.0.3",
     "uglify-js": "^2.6.2"
   }
 }

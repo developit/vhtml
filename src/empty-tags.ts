@@ -3,7 +3,6 @@ export default [
 	'base',
 	'br',
 	'col',
-	'command',
 	'embed',
 	'hr',
 	'img',

@@ -1,11 +1,9 @@
-import h from '../src/vhtml';
+import h from 'vhtml';
 import { expect } from 'chai';
-/** @jsx h */
-/*global describe,it*/
 
 describe('vhtml', () => {
 	it('should stringify html', () => {
-		let items = ['one', 'two', 'three'];
+		const items = ['one', 'two', 'three'];
 		expect(
 			<div class="foo">
 				<h1>Hi!</h1>
@@ -42,7 +40,7 @@ describe('vhtml', () => {
 
 	it('should not sanitize the "dangerouslySetInnerHTML" attribute, and directly set its `__html` property as innerHTML', () => {
 		expect(
-			<div dangerouslySetInnerHTML={{ __html: "<span>Injected HTML</span>" }} />
+			<div dangerouslySetInnerHTML={{ __html: '<span>Injected HTML</span>' }} />
 		).to.equal(
 			`<div><span>Injected HTML</span></div>`
 		);
@@ -52,16 +50,16 @@ describe('vhtml', () => {
 		expect(
 			<div>
 				{[['a','b']]}
-				<c>d</c>
+				<span>d</span>
 				{['e',['f'],[['g']]]}
 			</div>
 		).to.equal(
-			`<div>ab<c>d</c>efg</div>`
+			`<div>ab<span>d</span>efg</div>`
 		);
 	});
 
 	it('should support sortof components', () => {
-		let items = ['one', 'two'];
+		const items = ['one', 'two'];
 
 		const Item = ({ item, index, children }) => (
 			<li id={index}>
@@ -87,9 +85,10 @@ describe('vhtml', () => {
 	});
 
 	it('should support sortof components without args', () => {
-	  let items = ['one', 'two'];
+	  const items = ['one', 'two'];
 
-	  const Item = () => (
+	  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+	  const Item = ({ children }) => (
 	    <li>
 	      <h4></h4>
 	    </li>
@@ -99,7 +98,7 @@ describe('vhtml', () => {
 	    <div class="foo">
 	      <h1>Hi!</h1>
 	      <ul>
-	        { items.map( (item, index) => (
+	        { items.map( (item) => (
 	          <Item>
 	            This is item {item}!
 	          </Item>
@@ -112,7 +111,7 @@ describe('vhtml', () => {
 	});
 
 	it('should support sortof components without args but with children', () => {
-	  let items = ['one', 'two'];
+	  const items = ['one', 'two'];
 
 	  const Item = ({ children }) => (
 	    <li>
@@ -125,7 +124,7 @@ describe('vhtml', () => {
 	    <div class="foo">
 	      <h1>Hi!</h1>
 	      <ul>
-	        { items.map( (item, index) => (
+	        { items.map( (item) => (
 	          <Item>
 	            This is item {item}!
 	          </Item>
@@ -144,7 +143,6 @@ describe('vhtml', () => {
 				<base />
 				<br />
 				<col />
-				<command />
 				<embed />
 				<hr />
 				<img />
@@ -162,7 +160,7 @@ describe('vhtml', () => {
 				<p />
 			</div>
 		).to.equal(
-			`<div><area><base><br><col><command><embed><hr><img><input><keygen><link><meta><param><source><track><wbr><div></div><span></span><p></p></div>`
+			`<div><area><base><br><col><embed><hr><img><input><keygen><link><meta><param><source><track><wbr><div></div><span></span><p></p></div>`
 		);
 	});
 
@@ -176,7 +174,7 @@ describe('vhtml', () => {
 
 	it('should support string fragments', () => {
 		expect(
-			h(null, null, "foo", "bar", "baz")
+			h(null, null, 'foo', 'bar', 'baz')
 		).to.equal(
 			'foobarbaz'
 		);

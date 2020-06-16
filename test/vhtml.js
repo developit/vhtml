@@ -174,6 +174,23 @@ describe('vhtml', () => {
 		);
 	});
 
+	it('should support fragments', () => {
+		expect(
+			<h.Fragmant></h.Fragmant>
+		).to.equal(
+			''
+		);
+	});
+	it('should support fragments children', () => {
+		expect(
+			<h.Fragmant>
+				<h1>foo</h1>
+			</h.Fragmant>
+		).to.equal(
+			'<h1>foo</h1>'
+		);
+	});
+
 	it('should support string fragments', () => {
 		expect(
 			h(null, null, "foo", "bar", "baz")

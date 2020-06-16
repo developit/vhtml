@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"noEmit": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"jsx": "react",
+		"jsxFactory": "h",
+		"baseUrl": ".",
+		"lib": ["DOM"]
+	},
+	"include": ["src"]
+}

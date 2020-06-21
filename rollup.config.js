@@ -10,7 +10,7 @@ export default {
 	dest: pkg.main,
 	sourceMap: path.resolve(pkg.main),
 	moduleName: pkg.amdName,
-	exports: 'default',
+	exports: ['Fragmant', 'default'],
 	format: 'umd',
 	plugins: [
 		babel({

@@ -8,7 +8,7 @@ declare namespace h {
 
 	type Key = string | number | any;
 
-	type ComponentChild = string | string[] | number | boolean | null | undefined;
+	type ComponentChild = Record<string, any> | string | number | boolean | null | undefined;
 
 	type ComponentChildren = ComponentChild[] | ComponentChild;
 
@@ -41,6 +41,14 @@ declare namespace h {
 	const Fragmant: FunctionComponent;
 }
 
+/**
+ * Hyperscript reviver that constructs a sanitized HTML string.
+ *
+ * @param type - DOM node type to create.
+ * @param props - Property data object.
+ * @param children - Children components.
+ * @returns Sanitized HTML string.
+ */
 declare function h(
 	type: string,
 	props:
@@ -51,6 +59,14 @@ declare function h(
 	...children: h.ComponentChildren[]
 ): string;
 
+/**
+ * Hyperscript reviver that constructs a sanitized HTML string.
+ *
+ * @param type - DOM node type to create.
+ * @param props - Property data object.
+ * @param children - Children components.
+ * @returns Sanitized HTML string.
+ */
 declare function h<P>(
 	type: h.ComponentType<P>,
 	props: (h.Attributes & P) | null,

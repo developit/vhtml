@@ -101,3 +101,20 @@ The above outputs the following HTML:
   </ul>
 </div>
 ```
+
+### dangerouslySetInnerHTML
+As with React and Preact you can provide the prop `dangerouslySetInnerHTML` with an object containing `{__html: '<h1>HTML Content</h1>'}` to directly set the HTML content of an element. However, this is not advisable as it will ignore any children passed to it, and removes the benefits of JSX.
+
+Here is an example:
+```js
+<div dangerouslySetInnerHTML={{__html: '<h1>HTML Content</h1>'}}>
+  Overwritten content!
+</div>
+```
+
+The above outputs the following HTML:
+```html
+<div>
+  <h1>HTML Content</h1>
+</div>
+```

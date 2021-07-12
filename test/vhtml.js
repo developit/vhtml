@@ -196,6 +196,11 @@ describe('vhtml', () => {
 		).to.equal(
 			'<div hidden></div>'
 		);
+		expect(
+			<div hidden={false} />
+		).to.equal(
+			'<div></div>'
+		);
 	});
 
 });

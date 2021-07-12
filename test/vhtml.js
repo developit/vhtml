@@ -190,4 +190,17 @@ describe('vhtml', () => {
 		);
 	});
 
+	it('should support boolean attributes', () => {
+		expect(
+			<div hidden={true} />
+		).to.equal(
+			'<div hidden></div>'
+		);
+		expect(
+			<div hidden={false} />
+		).to.equal(
+			'<div></div>'
+		);
+	});
+
 });

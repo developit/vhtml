@@ -28,9 +28,13 @@ export default function h(name, attrs) {
 
 	if (name) {
 		s += '<' + name;
-		if (attrs) for (let i in attrs) {
-			if (attrs[i]!==false && attrs[i]!=null && i !== setInnerHTMLAttr) {
-				s += ` ${DOMAttributeNames[i] ? DOMAttributeNames[i] : esc(i)}="${esc(attrs[i])}"`;
+		if (attrs) {
+			for (let i in attrs) {
+				if (attrs[i] === true && i !== setInnerHTMLAttr) {
+					s += ` ${esc(i)}`;
+				} else if (attrs[i] !== false && attrs[i] != null && i !== setInnerHTMLAttr) {
+					s += ` ${DOMAttributeNames[i] ? DOMAttributeNames[i] : esc(i)}="${esc(attrs[i])}"`;
+				}
 			}
 		}
 		s += '>';

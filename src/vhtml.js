@@ -11,8 +11,10 @@ let DOMAttributeNames = {
 
 let sanitized = {};
 
+export const Fragment = ({ children }: { children: string[] }) => h(null as any, null, ...children);
+
 /** Hyperscript reviver that constructs a sanitized HTML string. */
-export default function h(name, attrs) {
+function h(name, attrs) {
 	let stack=[], s = '';
 	attrs = attrs || {};
 	for (let i=arguments.length; i-- > 2; ) {
@@ -58,3 +60,7 @@ export default function h(name, attrs) {
 	sanitized[s] = true;
 	return s;
 }
+
+h.Fragment = Fragment;
+
+export default h

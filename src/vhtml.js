@@ -29,7 +29,8 @@ export default function h(name, attrs) {
 	if (name) {
 		s += '<' + name;
 		if (attrs) for (let i in attrs) {
-			if (attrs[i]!==false && attrs[i]!=null && i !== setInnerHTMLAttr) {
+			// remove `__self` and `__source` from attributes(props).
+			if (!/^__s(elf|ource)$/.test(i) && attrs[i]!==false && attrs[i]!=null && i !== setInnerHTMLAttr) {
 				s += ` ${DOMAttributeNames[i] ? DOMAttributeNames[i] : esc(i)}="${esc(attrs[i])}"`;
 			}
 		}

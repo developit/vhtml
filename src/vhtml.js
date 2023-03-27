@@ -42,7 +42,7 @@ export default function h(name, attrs) {
 		}
 		else while (stack.length) {
 			let child = stack.pop();
-			if (child) {
+			if (child !== false && child !== undefined && child !== null) {
 				if (child.pop) {
 					for (let i=child.length; i--; ) stack.push(child[i]);
 				}

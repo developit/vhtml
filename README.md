@@ -101,3 +101,17 @@ The above outputs the following HTML:
   </ul>
 </div>
 ```
+
+### To generate comment in h
+
+```js
+h('!', null)
+h('!', null, <p>foo</p>, <em>bar</em>, <div class="qqqqqq">baz</div>)
+```
+
+The above outputs the following HTML:
+
+```html
+<!--  -->
+<!-- <p>foo</p><em>bar</em><div class="qqqqqq">baz</div> -->
+````
